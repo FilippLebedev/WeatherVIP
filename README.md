@@ -1,2 +1,3 @@
-# WeatherVIP
-Swift client for openweathermap.org / Clean Swift (VIP)
+# Description
+
+Swift client for [http://openweathermap.org](OpenWeather) based on Clean Swift (VIP) architecture
