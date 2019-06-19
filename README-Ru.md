@@ -17,7 +17,7 @@
 
 # Архитектура
 
-Проект написан на Clean Swift (VIP). Для генерации модулей используется шаблон YARCH от Альфа-Банка (https://github.com/alfa-laboratory/YARCH), но проект не имеет полного соответствия предложенной схеме. Тем не менее, [эта статья(https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE-rus.md) дает подробное представление о компонентах
+Проект написан на Clean Swift (VIP). Для генерации модулей используется шаблон YARCH от Альфа-Банка (https://github.com/alfa-laboratory/YARCH), но проект не имеет полного соответствия предложенной схеме. Тем не менее, [эта статья](https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE-rus.md) дает подробное представление о компонентах
 
 # Содержание проекта
 
