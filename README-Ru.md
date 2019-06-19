@@ -7,14 +7,27 @@
 <img src="http://www.picshare.ru/uploads/190618/t7UE6rp8DJ.png" width=375 height=667> <img src="http://www.picshare.ru/uploads/190618/Jo3GRmP1x7.png" width=375 height=667>
 <img src="http://www.picshare.ru/uploads/190618/E7i10aE20i.png" width=375 height=667> <img src="http://www.picshare.ru/uploads/190618/0lxFD5ocv7.png" width=375 height=667>
 
+# Архитектура
 
-# Модули
+# Использование
 
-## Поиск
+1. Зарегистрироваться на https://openweathermap.org и получить App Key
+2. Указать полученный ключ в AppPrivateData.openWeatherMapAPIKey
+3. Запустить проект и нажать на "+" в навигационном баре
+4. Ввести название города на английском для поиска. Нажать на ячейку с результатом поиска, чтобы добавить город в хранилище
 
-## Карта
+# Содержание проекта
 
-## Сохраненные города
+## Модули
 
-## Город / Прогноз
+### Поиск
 
+### Карта
+
+### Сохраненные города
+
+### Город / Прогноз
+
+## Сетевой слой
+
+## Хранилище
