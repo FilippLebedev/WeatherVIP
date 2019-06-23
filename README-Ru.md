@@ -17,7 +17,7 @@
 
 # Архитектура
 
-Проект написан на Clean Swift (VIP). Для генерации модулей используется шаблон [YARCH от Альфа-Банка](https://github.com/alfa-laboratory/YARCH), но проект не имеет полного соответствия предложенной схеме. Тем не менее, [эта статья](https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE-rus.md) дает подробное представление о компонентах
+Проект написан на Clean Swift (VIP). Для генерации модулей используется шаблон [YARCH от Альфа-Банка](https://github.com/alfa-laboratory/YARCH), но проект не имеет полного соответствия предложенной схеме. Например, в данном проекте используются Storyboard, а View нераздельно со ViewController. Тем не менее, [эта статья](https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE-rus.md) дает подробное представление о компонентах
 
 ## Пример use-case
 
@@ -27,11 +27,14 @@
 
 Каждый модуль наделен конфигуратором, при обращении к которому устанавливается начальное состояние модуля (например, состояние загрузки, или initial state с ID сущности, если модуль должен отобразить данные по какому-то объекту из хранилища)
 
+```swift
 let searchController = SearchBuilder().set(initialState: .loading).build()
 navigationController?.pushViewController(searchController, animated: true)
+```
 
 Метод set устанавливает начальное состояние. А в методе build выполняется генерация контроллера и инъекция зависимых сущностей (презентера, интерактора). Затем, возвращается уже "собранный" контроллер, который достаточно просто отобразить
 
+```swift
 func build() -> UIViewController {
     let presenter = SearchPresenter()
     let interactor = SearchInteractor(presenter: presenter)
@@ -44,6 +47,7 @@ func build() -> UIViewController {
 
     return controller ?? UIViewController()
 }
+```
 
 ### DataFlow - описание use-cases
 
@@ -51,6 +55,7 @@ Request - запрос на поиск города по строке searchText
 Response - в случае успеха, модель города, подходящая для сохранения в хранилище
 ViewModel - модель ответа, подходящая для отображения во View. В простом случае - просто ViewModel. Согласно шаблону YARCH предлагается задавать состояние View Controller исходя из полученного ответа. Приемлемо ограничиваться просто описанием свойств ViewModel (или только result и error), особенно если в модуле множество кейсов, и каждому из них не следует брать на себя управление состоянием контроллера
 
+```swift
 enum SearchCity {
     struct Request {
         let searchText: String
@@ -77,20 +82,24 @@ enum ViewControllerState {
     case emptyResult
     case error(message: String)
 }
+```
 
 ### ViewController
 
 При изменении текстового поля обращается к интерактору
 
+```swift
 func searchCity(text: String) {
     let request = Search.SearchCity.Request(searchText: text)
     interactor?.searchCity(request: request)
 }
+```
 
 ### Interactor
 
 Обращается к провайдеру, а затем на основе его ответа подготавливает Response для передачи в презентер
 
+```swift
 func searchCity(request: Search.SearchCity.Request) {
     provider.searchCities(searchText: request.searchText) { (items, error) in
         let result: Search.SearchCityRequestResult
@@ -105,11 +114,13 @@ func searchCity(request: Search.SearchCity.Request) {
         self.presenter.presentCities(response: Search.SearchCity.Response(result: result))
     }
 }
+```
 
 ### Provider
 
 Провайдер занимается обращением к сервису или хранилищу, то есть принимает решение об источнике данных и выдает их в виде storage-модели
 
+```swift
 func searchCities(searchText: String, completion: @escaping ([CityStorageModel]?, SearchProviderError?) -> Void) {
     service.fetchCities(searchText: searchText) { (array, error) in
         if let error = error {
@@ -119,11 +130,13 @@ func searchCities(searchText: String, completion: @escaping ([CityStorageModel]?
         }
     }
 }
+```
 
 ### Service
 
 Служит для общения с API-клиентом
 
+```swift
 func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?, Error?) -> Void) {
     apiClient.cancelAllRequests()
 
@@ -138,6 +151,7 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
         }
     }
 }
+```
 
 Примечание. В методе apiClient.cancelAllRequests() выполняется отмена всех текущих запросов к API. Поскольку при каждом изменении в текстовом поле, генерируется запрос к API. Это нужно чтобы результаты поиска друг-друга не обгоняли и всегда запрашивался только поиск по актуальному тексту в SearchBar. В реальном проекте неприемлемо сбрасывать все запросы, поэтому нужно сбрасывать только определенные запросы. Или не отменять реквесты, а просто выполнять проверку на актуальность полученных данных на слое View.
 
@@ -145,6 +159,7 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 
 Когда результаты поиска получены, интерактор сообщает об этом презентеру, передавая данные в структуре Response, которые интерактор преобразует во ViewModel, чтобы наконец отобразить во View
 
+```swift
 func presentCities(response: Search.SearchCity.Response) {
     var viewModel: Search.SearchCity.ViewModel
 
@@ -162,6 +177,7 @@ func presentCities(response: Search.SearchCity.Response) {
 
     viewController?.displayCities(viewModel: viewModel)
 }
+```
 
 ### DataStore
 
@@ -195,10 +211,16 @@ func presentCities(response: Search.SearchCity.Response) {
 
 Общение с локальным хранилищем выполняется по протоколу StorageManagerProtocol, определяющим CRUD-методы, которые должен имплементировать клиент для хранилища. В данном примере используется Realm, взаимодействие с которым реализовано в классе RealmService
 
-# TODO
+# TODO / Баги / Как улучшить проект?
 
 * Покрытие тестами
-* 
+* Введение нового слоя модели (для обработки ответа конкретных API) и адаптера для storage-модели, поскольку она полностью завязана на Realm, а также в ней прописаны неизменяемые CodingKeys, что делает ее связанной с определенным API
+* Обработка и вывод ошибок
+* Погода на карте не всегда выводится после получения
 
 # Рекомендуется к изучению
 
+* [Clean swift архитектура как альтернатива VIPER](https://habr.com/ru/post/415725/)
+* [YARCH](https://github.com/alfa-laboratory/YARCH)
+* [Документация Realm](https://realm.io/docs/swift/latest/)
+* [CodableAlamofire](https://github.com/Otbivnoe/CodableAlamofire)
