@@ -78,8 +78,6 @@ enum ViewControllerState {
     case error(message: String)
 }
 
-### DataFlow - описание use-cases
-
 ### ViewController
 
 При изменении текстового поля обращается к интерактору
@@ -141,9 +139,33 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
     }
 }
 
+Примечание. В методе apiClient.cancelAllRequests() выполняется отмена всех текущих запросов к API. Поскольку при каждом изменении в текстовом поле, генерируется запрос к API. Это нужно чтобы результаты поиска друг-друга не обгоняли и всегда запрашивался только поиск по актуальному тексту в SearchBar. В реальном проекте неприемлемо сбрасывать все запросы, поэтому нужно сбрасывать только определенные запросы. Или не отменять реквесты, а просто выполнять проверку на актуальность полученных данных на слое View.
+
 ### Presenter
 
+Когда результаты поиска получены, интерактор сообщает об этом презентеру, передавая данные в структуре Response, которые интерактор преобразует во ViewModel, чтобы наконец отобразить во View
 
+func presentCities(response: Search.SearchCity.Response) {
+    var viewModel: Search.SearchCity.ViewModel
+
+    switch response.result {
+    case let .failure(error):
+        viewModel = Search.SearchCity.ViewModel(state: .error(message: error.localizedDescription))
+    case let .success(result):
+        if result.isEmpty {
+            viewModel = Search.SearchCity.ViewModel(state: .emptyResult)
+        } else {
+            let cities = result.map { SearchCityModel(id: $0.id, name: $0.name, latitude: $0.latitude, longitude: $0.longitude, temp: $0.temp) }
+            viewModel = Search.SearchCity.ViewModel(state: .result(cities))
+        }
+    }
+
+    viewController?.displayCities(viewModel: viewModel)
+}
+
+### DataStore
+
+Не задействован в данном кейсе. Используется для взаимодействия с локальным хранилищем
 
 # Содержание проекта
 
@@ -155,9 +177,15 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 
 ### Карта
 
+Сохраненные города отображаются на карте с указанием текущей температуры
+
 ### Сохраненные города
 
+Список городов в хранилище. Города можно удалять свайпом влево
+
 ### Город / Прогноз
+
+Текущая температура в выбранном городе и подмодуль с таблицей прогноза погоды на 5 дней
 
 ## Сетевой слой
 
@@ -168,6 +196,9 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 Общение с локальным хранилищем выполняется по протоколу StorageManagerProtocol, определяющим CRUD-методы, которые должен имплементировать клиент для хранилища. В данном примере используется Realm, взаимодействие с которым реализовано в классе RealmService
 
 # TODO
+
+* Покрытие тестами
+* 
 
 # Рекомендуется к изучению
 
