@@ -50,13 +50,13 @@ func build() -> UIViewController {
 }
 ```
 
-### DataFlow - описание use-cases
+### DataFlow - the description of use-cases
 
-Request - запрос на поиск города по строке searchText
+Request - a request of city searching by searchText string
 
-Response - в случае успеха, модель города, пригодная для записи в хранилище
+Response - the city model suitable for signing up in storage (if success)
 
-ViewModel - модель ответа, подходящая для отображения во View. В простом случае - просто ViewModel. Согласно шаблону YARCH предлагается задавать состояние View Controller исходя из полученного ответа. Приемлемо ограничиваться описанием свойств ViewModel (или только result и error), особенно если в модуле множество кейсов, и каждому из них не следует брать на себя управление состоянием контроллера
+ViewModel - the answer model suitable for display in View. According to the YARCH template it is offered to set View Controller state proceeding from the received answer. But it is acceptable for this struct just to be the description of ViewModel properties (or only result and error), especially if there is a lot of cases, and each of them should not undertake state management of the controller
 
 ```swift
 enum SearchCity {
@@ -89,7 +89,7 @@ enum ViewControllerState {
 
 ### ViewController
 
-При изменении текстового поля обращается к интерактору
+Calls interactor when search text field changed
 
 ```swift
 func searchCity(text: String) {
@@ -100,7 +100,7 @@ func searchCity(text: String) {
 
 ### Interactor
 
-Обращается к провайдеру, а затем на основе его ответа подготавливает Response для передачи в презентер
+Addresses provider and then prepares Response for transfer to presenter
 
 ```swift
 func searchCity(request: Search.SearchCity.Request) {
@@ -121,7 +121,7 @@ func searchCity(request: Search.SearchCity.Request) {
 
 ### Provider
 
-Провайдер занимается обращением к сервису или хранилищу, запрашивает данные и выдает их в виде storage-модели
+Provider appeals to service or storage, requests data and return it as storage-model
 
 ```swift
 func searchCities(searchText: String, completion: @escaping ([CityStorageModel]?, SearchProviderError?) -> Void) {
@@ -137,7 +137,7 @@ func searchCities(searchText: String, completion: @escaping ([CityStorageModel]?
 
 ### Service
 
-Служит для общения с API-клиентом
+Serves for communication with API client
 
 ```swift
 func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?, Error?) -> Void) {
