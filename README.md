@@ -160,7 +160,7 @@ Note. In the apiClient.cancelAllRequests() method canceling of all current reque
 
 ### Presenter
 
-Когда результаты поиска получены, интерактор сообщает об этом презентеру, передавая данные в структуре Response, которые интерактор преобразует во ViewModel, чтобы наконец отобразить во View
+When search results are received interactor reports about it to presenter, transferring data in Response struct which interactor will transform to ViewModel at last to display in View
 
 ```swift
 func presentCities(response: Search.SearchCity.Response) {
@@ -184,31 +184,31 @@ func presentCities(response: Search.SearchCity.Response) {
 
 ### DataStore
 
-Не задействован в данном кейсе. Используется для взаимодействия с локальным хранилищем
+Not involved for this case. It is used for interaction with local storage
 
-# Содержание проекта
+# Contents of the project
 
-## Модули
+## Modules
 
-### Поиск
+### Search
 
-При изменении текстового поля выполняется обращение к API. Полученный результат отображается в таблице. Найденый город можно сохранить в локальное хранилище, тапнув по ячейке
+API call is carried out at text field change. The received result is displayed in the table. The found city can be saved in local storage by cell tapping
 
-### Карта
+### Map
 
-Сохраненные города отображаются на карте с указанием текущей температуры
+Saved cities are displayed on map with current temperature indicator
 
-### Сохраненные города
+### Saved cities
 
-Список городов в хранилище. Города можно удалять свайпом влево
+The list of cities from storage. The cities can be deleted by swipe
 
-### Город / Прогноз
+### City / Forecast
 
-Текущая температура в выбранном городе и подмодуль с таблицей прогноза погоды на 5 дней
+The current temperature in the selected city. And a submodule with the table of a weather forecast for 5 days
 
-## Сетевой слой
+## Network layer
 
-Протокол APIClient описывает требования для клиента API. Таким образом, сервисный слой полностью отвязан от имплементации клиента. Могут быть подключены другие источники данных (в том числе локальные) 
+The APIClient protocol describes requirements for the client of API. Thus, the service layer is completely unrelated from client implementation. Other data sources can be connected (including local)
 
 ## Хранилище
 
