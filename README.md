@@ -7,34 +7,33 @@ OpenWeather client written on Swift 5. Clean Swift (VIP) architecture used
 <img src="http://www.picshare.ru/uploads/190618/t7UE6rp8DJ.png" width=375 height=667> <img src="http://www.picshare.ru/uploads/190618/Jo3GRmP1x7.png" width=375 height=667>
 <img src="http://www.picshare.ru/uploads/190618/E7i10aE20i.png" width=375 height=667> <img src="http://www.picshare.ru/uploads/190618/0lxFD5ocv7.png" width=375 height=667>
 
-# Using
+# How to use?
 
 1. Register on https://openweathermap.org and receive App Key
 2. Specify received key in AppPrivateData.openWeatherMapAPIKey
-3. Build the project and press on "+" in navigation bar
-4. Enter the name of the city in English for search. Press a cell with search result to add the city into storage
-5. Pass into Cities to see forecast and current temperature for saved cities
+3. Build the project and tap "+" in navigation bar
+4. Enter the city to search (in English). Press a cell with search result to add city into storage
+5. Pass into Cities to watch forecast and current temperature for saved cities
 
 # Architecture
 
-The project is constructed on Clean Swift (VIP). For generation of modules the template [YARCH from Alfa-Bank] is used (https://github.com/alfa-laboratory/YARCH), but the project has no full compliance to the offered scheme. For example, in this project Storyboard, and View unseparably from ViewController are used. Nevertheless, [this article] (https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE.md) gives a detailed idea of components
+The project is constructed on Clean Swift (VIP). [YARCH from Alfa-Bank] (https://github.com/alfa-laboratory/YARCH) template is used for module generation, but the project has no full compliance to the offered scheme. For example, Storyboards are using, and View is not separated from ViewController. Nevertheless, [this article] (https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE.md) gives a detailed idea of components
 
-## Example of use-case
+## Use-case example
 
-Algorithm of city searching by the name with examples of the code
+Algorithm of city searching by the name with code examples
 
 ### Builder - configuration of the module
 
-Each module has configurator at the appeal to which the initial state of the module been set (for example, loading; or initial state with the identifier of object if the module has to display data on any object)
+Each module has configurator at the appeal to which the initial state of the module been set (for example, loading; or initial state with the identifier of object if module has to display data of specified object)
 
 ```swift
 let searchController = SearchBuilder().set(initialState: .loading).build()
 navigationController?.pushViewController(searchController, animated: true)
 ```
 
-Метод set устанавливает начальное состояние. А в методе build выполняется инициализация контроллера и инъекция зависимых сущностей (презентера, интерактора). Затем возвращается уже "собранный" контроллер, который достаточно только отобразить
-
-Set method sets start state. And in the build method initialization of the controller and an injection of dependent entities is carried out (a prezenter, an interaktor). Then already "assembled" controller which is only enough to be displayed returns
+* set(initialState) - defines start state
+* build() - controller initialization and an injection of dependent entities (presenter, interactor) is carried out. Then it is enough just to display assembled controller
 
 ```swift
 func build() -> UIViewController {
