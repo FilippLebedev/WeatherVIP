@@ -156,7 +156,7 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 }
 ```
 
-Примечание. В методе apiClient.cancelAllRequests() выполняется отмена всех текущих запросов к API. Поскольку при каждом изменении в текстовом поле генерируется запрос к API. Это нужно, чтобы результаты поиска друг-друга не обгоняли и всегда приходил результат только по актуальному тексту в SearchBar. В реальном проекте неприемлемо сбрасывать одновременно все запросы, поэтому должна быть возможность отменять конкретный запрос. Или же надо не отменять реквесты, а просто выполнять проверку на актуальность полученных данных на слое View
+Note. In the apiClient.cancelAllRequests() method canceling of all current requests to API is carried out. As at each change in a text box the request to API is generated. It is necessary for preventing race condition of search results - so the result  for the relevant search text only will come back. In real projects it is unacceptable to reset all requests at the same time therefore there has to be an opportunity to cancel a specific request. Or it is necessary not to cancel requests and just to check on relevance of data retrieveds on View
 
 ### Presenter
 
