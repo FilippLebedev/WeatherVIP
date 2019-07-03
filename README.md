@@ -210,20 +210,19 @@ The current temperature in the selected city. And a submodule with the table of 
 
 The APIClient protocol describes requirements for the client of API. Thus, the service layer is completely unrelated from client implementation. Other data sources can be connected (including local)
 
-## Хранилище
+## Storage
 
-Общение с локальным хранилищем выполняется по протоколу StorageManagerProtocol, определяющим CRUD-методы, которые должен имплементировать клиент для хранилища. В данном примере используется Realm, взаимодействие с которым реализовано в классе RealmService
+Communication with local storage is carried out under the StorageManagerProtocol protocol that definines CRUD methods which the storage client should implement. Realm is used in this example. Interaction with it is implemented in RealmService class
 
-# TODO / Баги / Как улучшить проект?
+# TODO / Bugs / How to improve the project?
 
-* Покрытие тестами
-* Введение нового слоя модели (для обработки ответа конкретных API) и адаптера для storage-модели, которая в данный момент полностью завязана на Realm, а также в ней прописаны неизменяемые CodingKeys, что делает ее связанной с определенным API
-* Обработка и вывод ошибок
-* Погода на карте не всегда выводится после получения
+* Increase test coverage
+* Introduce new layer of model (to process responses from specific APIs) and adapter for storage-model which is completely tied on Realm at present. And also unchangeable CodingKeys are specified in it that makes model related with certain API
+* Error processing and output
+* Weather on the card is not always displayed after receiving
 
-# Полезное
+# Useful
 
-* [Clean swift архитектура как альтернатива VIPER](https://habr.com/ru/post/415725/)
 * [YARCH](https://github.com/alfa-laboratory/YARCH)
-* [Документация Realm](https://realm.io/docs/swift/latest/)
+* [Realm documentation](https://realm.io/docs/swift/latest/)
 * [CodableAlamofire](https://github.com/Otbivnoe/CodableAlamofire)
