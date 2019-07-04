@@ -156,7 +156,7 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 }
 ```
 
-***Note*** *In the apiClient.cancelAllRequests() method canceling of all current requests to API is carried out. As at each change in a text box the request to API is generated. It is necessary for preventing race condition of search results - so the result for the relevant search text only will come back. In real projects it is unacceptable to reset all requests at the same time therefore there has to be an opportunity to cancel a specific request. Or it is necessary not to cancel requests and just to check on relevance of data retrieveds on View*
+***Note:*** *In the apiClient.cancelAllRequests() method canceling of all current requests to API is carried out. As at each change in a text box the request to API is generated. It is necessary for preventing race condition of search results - so the result for the relevant search text only will come back. In real projects it is unacceptable to reset all requests at the same time therefore there has to be an opportunity to cancel a specific request. Or it is necessary not to cancel requests and just to check on relevance of data retrieveds on View*
 
 ### Presenter
 
