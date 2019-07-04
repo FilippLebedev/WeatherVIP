@@ -1,6 +1,6 @@
 # ⛅ Weather VIP ⛅
 
-[🇬🇧 ОПИСАНИЕ НА РУССКОМ 🇬🇧](README-Ru.md)
+[🇷🇺 ОПИСАНИЕ НА РУССКОМ 🇷🇺](README-Ru.md)
 
 OpenWeather client written on Swift 5. Clean Swift (VIP) architecture used
 
@@ -17,11 +17,11 @@ OpenWeather client written on Swift 5. Clean Swift (VIP) architecture used
 
 # Architecture
 
-The project is constructed on Clean Swift (VIP). [YARCH from Alfa-Bank] (https://github.com/alfa-laboratory/YARCH) template is used for module generation, but the project has no full compliance to the offered scheme. For example, Storyboards are using, and View is not separated from ViewController. Nevertheless, [this article] (https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE.md) gives a detailed idea of components
+The project is constructed on Clean Swift (VIP). [YARCH from Alfa-Bank](https://github.com/alfa-laboratory/YARCH) template is used for module generation, but this project has no full compliance to the offered scheme. For example, Storyboards are using, and View is not separated from ViewController. Nevertheless, [this article](https://github.com/alfa-laboratory/YARCH/blob/master/GUIDE.md) gives a detailed idea of components
 
 ## Use-case example
 
-Algorithm of city searching by the name with code examples
+Algorithm of city searching with code examples
 
 ### Builder - configuration of the module
 
@@ -32,8 +32,8 @@ let searchController = SearchBuilder().set(initialState: .loading).build()
 navigationController?.pushViewController(searchController, animated: true)
 ```
 
-* set(initialState) - defines start state
-* build() - controller initialization and an injection of dependent entities (presenter, interactor) is carried out. Then it is enough just to display assembled controller
+* **set(initialState)** - defines start state
+* **build()** - controller initialization and an injection of dependent entities (presenter, interactor) is carried out. Then it is enough just to display assembled controller
 
 ```swift
 func build() -> UIViewController {
@@ -52,11 +52,11 @@ func build() -> UIViewController {
 
 ### DataFlow - the description of use-cases
 
-Request - a request of city searching by searchText string
+**Request** - a request of city searching by *searchText* string
 
-Response - the city model suitable for signing up in storage (if success)
+**Response** - the city model suitable for signing up in storage (if success)
 
-ViewModel - the answer model suitable for display in View. According to the YARCH template it is offered to set View Controller state proceeding from the received answer. But it is acceptable for this struct just to be the description of ViewModel properties (or only result and error), especially if there is a lot of cases, and each of them should not undertake state management of the controller
+**ViewModel** - the answer model suitable for display in View. According to the YARCH template it is offered to set View Controller state proceeding from the received answer. But it is acceptable for this struct just to be the description of ViewModel properties (or only result and error), especially if there is a lot of cases, and each of them should not undertake state management of the controller
 
 ```swift
 enum SearchCity {
@@ -156,7 +156,7 @@ func fetchCities(searchText: String, completion: @escaping ([CityStorageModel]?,
 }
 ```
 
-Note. In the apiClient.cancelAllRequests() method canceling of all current requests to API is carried out. As at each change in a text box the request to API is generated. It is necessary for preventing race condition of search results - so the result  for the relevant search text only will come back. In real projects it is unacceptable to reset all requests at the same time therefore there has to be an opportunity to cancel a specific request. Or it is necessary not to cancel requests and just to check on relevance of data retrieveds on View
+***Note*** *In the apiClient.cancelAllRequests() method canceling of all current requests to API is carried out. As at each change in a text box the request to API is generated. It is necessary for preventing race condition of search results - so the result for the relevant search text only will come back. In real projects it is unacceptable to reset all requests at the same time therefore there has to be an opportunity to cancel a specific request. Or it is necessary not to cancel requests and just to check on relevance of data retrieveds on View*
 
 ### Presenter
 
