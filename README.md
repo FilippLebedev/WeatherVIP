@@ -9,10 +9,10 @@ OpenWeather client written on Swift 5. Clean Swift (VIP) architecture used
 
 # How to use?
 
-1. Register on https://openweathermap.org and receive App Key
-2. Specify received key in AppPrivateData.openWeatherMapAPIKey
+1. Register on [OpenWeather](https://openweathermap.org) and receive App Key
+2. Specify received key in *AppPrivateData.openWeatherMapAPIKey*
 3. Build the project and tap "+" in navigation bar
-4. Enter the city to search (in English). Press a cell with search result to add city into storage
+4. Enter the city to search (in English). Tap on cell with search result to add city into storage
 5. Pass into Cities to watch forecast and current temperature for saved cities
 
 # Architecture
