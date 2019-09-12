@@ -1,0 +1,39 @@
+PODS:
+  - Alamofire (4.8.1)
+  - Alertift (4.1)
+  - CodableAlamofire (1.1.0):
+    - Alamofire (~> 4.0)
+  - Realm (3.13.1):
+    - Realm/Headers (= 3.13.1)
+  - Realm/Headers (3.13.1)
+  - RealmSwift (3.13.1):
+    - Realm (= 3.13.1)
+  - SnapKit (5.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Alertift
+  - CodableAlamofire
+  - RealmSwift
+  - SnapKit (~> 5.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Alertift
+    - CodableAlamofire
+    - Realm
+    - RealmSwift
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  Alertift: bfc526e0bb8be206c85d279287c3dd392b0fe312
+  CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
+  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
+  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
+
+PODFILE CHECKSUM: 1a8cab681d14fa82e52314ca6f41a93b7bedf186
+
+COCOAPODS: 1.5.3

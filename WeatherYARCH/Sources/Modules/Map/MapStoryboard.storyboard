@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="54v-lh-VXS">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map-->
+        <scene sceneID="vnK-KI-jZF">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="fIJ-TI-nsS" customClass="MapViewController" customModule="WeatherYARCH" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XXS-PI-ft0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bXY-Rx-i5D" customClass="MapView" customModule="WeatherYARCH" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-Au-JA0" customClass="MapButton" customModule="WeatherYARCH" customModuleProvider="target">
+                                <rect key="frame" x="349" y="419.5" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="RbM-yJ-wxU"/>
+                                    <constraint firstAttribute="height" constant="45" id="rlo-pZ-3BP"/>
+                                </constraints>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="plusZoomPressed:" destination="fIJ-TI-nsS" eventType="touchUpInside" id="5Mc-GK-4pg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uW-da-SyL" customClass="MapButton" customModule="WeatherYARCH" customModuleProvider="target">
+                                <rect key="frame" x="349" y="484.5" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="5rg-HU-sB3"/>
+                                    <constraint firstAttribute="width" constant="45" id="7dC-kC-Xul"/>
+                                </constraints>
+                                <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="minusZoomPressed:" destination="fIJ-TI-nsS" eventType="touchUpInside" id="Ce2-bi-Gb6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bXY-Rx-i5D" firstAttribute="top" secondItem="l6B-7i-ydq" secondAttribute="top" id="0ey-9D-ef9"/>
+                            <constraint firstItem="Gkb-Au-JA0" firstAttribute="centerY" secondItem="bXY-Rx-i5D" secondAttribute="centerY" constant="-50" id="1DA-yq-n7A"/>
+                            <constraint firstItem="Gkb-Au-JA0" firstAttribute="trailing" secondItem="bXY-Rx-i5D" secondAttribute="trailing" constant="-20" id="7Sl-4U-0lh"/>
+                            <constraint firstItem="5uW-da-SyL" firstAttribute="top" secondItem="Gkb-Au-JA0" secondAttribute="bottom" constant="20" id="RIB-k7-pZt"/>
+                            <constraint firstItem="bXY-Rx-i5D" firstAttribute="leading" secondItem="XXS-PI-ft0" secondAttribute="leading" id="SmK-o7-02o"/>
+                            <constraint firstAttribute="trailing" secondItem="bXY-Rx-i5D" secondAttribute="trailing" id="fgy-L8-UN2"/>
+                            <constraint firstAttribute="bottom" secondItem="bXY-Rx-i5D" secondAttribute="bottom" id="nNJ-FV-auv"/>
+                            <constraint firstItem="5uW-da-SyL" firstAttribute="centerX" secondItem="Gkb-Au-JA0" secondAttribute="centerX" id="xjB-X4-AHP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l6B-7i-ydq"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="S57-QD-pSP">
+                        <barButtonItem key="leftBarButtonItem" title="Cities" id="cZp-69-Pkl">
+                            <connections>
+                                <action selector="citiesButtonPressed:" destination="fIJ-TI-nsS" id="6qN-8F-It1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bk1-yn-tcK">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="fIJ-TI-nsS" id="vcE-3p-EVc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="bXY-Rx-i5D" id="t9T-6o-5BG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bb8-HU-3Uy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="175.86206896551727"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="p5U-xo-V4g">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="54v-lh-VXS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6M2-fn-PhH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fIJ-TI-nsS" kind="relationship" relationship="rootViewController" id="udl-J9-eMH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ji0-Nh-47X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137" y="176"/>
+        </scene>
+    </scenes>
+</document>
