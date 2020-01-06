@@ -5,7 +5,7 @@
 OpenWeather client written on Swift 5. Clean Swift (VIP) architecture used
 
 <img src="https://i.yapx.ru/GGZHq.png" width=375 height=667> <img src="https://i.yapx.ru/GGZHu.png" width=375 height=667>
-<img src="https://i.yapx.ru/GGZHo.png" width=375 height=667> <img src="https://i.yapx.ru/GGZHr.png" width=375 height=667>
+<img src="https://i.yapx.ru/GGZKv.png" width=375 height=667> <img src="https://i.yapx.ru/GGZHr.png" width=375 height=667>
 
 # How to use?
 
